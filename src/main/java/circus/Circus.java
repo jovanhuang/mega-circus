@@ -1,13 +1,15 @@
 package circus;
 
+
 import circus.animal.*;
+import circus.stuff.Cage;
 import circus.stuff.Cannon;
 import circus.stuff.Equipment;
 import circus.stuff.Ladder;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+
 
 public class Circus {
     private static Animal[] animals = {
@@ -34,6 +36,7 @@ public class Circus {
                 System.out.println("Ignoring low value item: " + a.getValue());
                 continue;
             }
+
             total += a.getValue();
             System.out.println("Adding item value: " + a.getValue());
         }
@@ -41,13 +44,7 @@ public class Circus {
     }
 
     public static void main(String[] args) {
-//        makeAnimalsTalk();
-//        System.out.println("Total value of animals " + calculateAssetValue(animals));
-//        System.out.println("Total value of equipments " + calculateAssetValue(equipments));
-
         System.out.println("Number of animals: " + animals.length);
-//        animals[2] = new Tiger("Sherkhan");
-//        makeAnimalsTalk();
 
         ArrayList<Animal> animalArrayList = new ArrayList<>(Arrays.asList(animals));
         System.out.println("Number of animals: " + animalArrayList.size());
@@ -75,8 +72,25 @@ public class Circus {
         System.out.println("Louise's position is: " + animalArrayList.indexOf(louise));
 
         System.out.println(Arrays.toString(animals));
-    }
 
+        makeAnimalsTalk();
+        System.out.println("Total value of animals " + calculateAssetValue(animals));
+        System.out.println("Total value of equipments " + calculateAssetValue(equipments));
+        Cage<Duck> duckCage = new Cage<>();
+        Duck duck = new Duck("Dewey");
+        duckCage.lockUp(duck);
+        Parrot parrot = new Parrot("Popper");
+        Cage<Parrot> parrotCage = new Cage<>();
+        parrotCage.lockUp(parrot);
+
+        ArrayList<Cage> cages = new ArrayList<>();
+        cages.add(duckCage);
+        cages.add(parrotCage);
+
+        for(Cage c: cages) {
+            c.release();
+        }
+    }
     private static void printAllAnimals(ArrayList<Animal> animalArrayList) {
         for (Animal a : animalArrayList) {
             System.out.println(a);
